@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Электросамокаты — Исследовательский проект</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #090a0f;
+            --bg-gradient: radial-gradient(circle at 80% 20%, #1e2638 0%, #090a0f 50%);
+            --card: rgba(22, 27, 34, 0.4);
+            --card-hover: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(59, 130, 246, 0.5);
+            --text: #f0f6fc;
+            --muted: #8b949e;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        section {
+            padding: 140px 0;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            filter: blur(150px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-label {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: inline-block;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: var(--accent-glow);
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin-bottom: 32px;
+            background: linear-gradient(180deg, #ffffff 0%, #adbac7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--muted);
+            margin-bottom: 24px;
+            max-width: 650px;
+            font-weight: 300;
+        }
+
+        .authors {
+            margin-top: 60px;
+            color: #6e7681;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            border-left: 2px solid var(--border);
+            padding-left: 20px;
+        }
+
+        .authors strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* SECTION TITLES */
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 60px;
+            letter-spacing: -0.03em;
+            position: relative;
+        }
+
+        /* INTRO SECTION */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .intro-text p {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 28px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .intro-text p:not(:first-child) {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .intro-aside {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+        }
+
+        .intro-aside h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .intro-aside p {
+            color: var(--text);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .intro-aside p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* GALLERY SECTION */
+        .gallery-mesh {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .gallery-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(12px);
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 340px;
+            background: #161b22;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-desc {
+            padding: 32px;
+        }
+
+        .gallery-desc h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .gallery-desc p {
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        /* PROBLEMS SECTION */
+        .problems-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .problem-item {
+            background: transparent;
+            border-top: 1px solid var(--border);
+            padding: 32px 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .problem-item:hover {
+            border-top-color: var(--accent);
+        }
+
+        .problem-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .problem-item h3::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .problem-item p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        /* RECOMMENDATIONS SECTION */
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .rec-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .rec-card:hover {
+            background: var(--card-hover);
+            border-color: var(--border-hover);
+        }
+
+        .rec-number {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: monospace;
+            opacity: 0.8;
+        }
+
+        .rec-meta h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .rec-meta p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* RULES SECTION */
+        .rules-wrapper {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 32px;
+        }
+
+        .rules-image {
+            border-radius: 20px;
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 80px 0;
+            background: #06070a;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer p {
+            color: #57606a;
+            font-size: 0.9rem;
+        }
+
+        footer p:last-child {
+            font-family: monospace;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .rec-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            section {
+                padding: 90px 0;
+            }
+
+            .intro-grid,
+            .gallery-mesh,
+            .problems-list {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-grid {
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+
+            footer .container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rec-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-label">Исследовательский проект</div>
+                <h1>Электросамокаты</h1>
+                <p>Современный городской транспорт, ставший неотъемлемой частью повседневной мобильности миллионов
+                    людей.</p>
+                <p>Анализ преимуществ, вызовов интеграции в городскую среду и стандартов безопасного использования.</p>
+
+                <div class="authors">
+                    Авторы: <br>
+                    <strong>Васильев Артем, Федоров Георгий</strong> (СТ25-2)<br>
+                    <strong>Шевченко Ксения, Журавлева Кристина</strong> (СТ25-1)<br><br>
+                    Руководитель: <strong>Пехова Надежда Юрьевна</strong><br>
+                    ГАУ КО ПО «Колледж сервиса и туризма»
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Введение</h2>
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <p>В современных мегаполисах и развивающихся городах проблема транспортной загруженности с каждым
+                        годом становится всё более острой.</p>
+                    <p>Электросамокаты и средства индивидуальной мобильности (СИМ) стали эффективной альтернативой
+                        личным автомобилям и перегруженному общественному транспорту благодаря своей маневренности и
+                        доступности.</p>
+                    <p>Особенно активно данный тренд подхватила молодёжь, формируя новую культуру городского движения.
+                    </p>
+                </div>
+                <div class="intro-aside">
+                    <h3>Актуальность</h3>
+                    <p>Стремительное развитие технологий и шеринговых платформ за короткий срок превратило
+                        электросамокаты из развлечения в полноценный элемент транспортной экосистемы.</p>
+
+                    <h3>Цель проекта</h3>
+                    <p>Комплексное изучение особенностей эксплуатации электросамокатов и разработка практических
+                        рекомендаций по повышению безопасности на дорогах.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Электросамокаты сегодня</h2>
+            <div class="gallery-mesh">
+                <div class="gallery-card">
+                    <div class="gallery-img-wrapper"><img src="past.jpg" alt="Развитие транспорта"></div>
+                    <div class="gallery-desc">
+                        <h3>Развитие транспорта</h3>
+                        <p>Эволюция технологических решений от первых экспериментальных прототипов до умных шеринговых
+                            платформ.</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-img-wrapper"><img src="boy.jpg" alt="Популярность среди молодёжи"></div>
+                    <div class="gallery-desc">
+                        <h3>Популярность среди молодёжи</h3>
+                        <p>Студенты и подростки составляют ядро аудитории, активно использующее СИМ для ежедневных
+                            поездок.</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-img-wrapper"><img src="park.jpg" alt="Городская инфраструктура"></div>
+                    <div class="gallery-desc">
+                        <h3>Городская инфраструктура</h3>
+                        <p>Выделенные велодорожки, станции зарядки и специализированные парковочные зоны меняют облик
+                            улиц.</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-img-wrapper"><img src="peshehody.jpg" alt="Повседневное использование"></div>
+                    <div class="gallery-desc">
+                        <h3>Повседневное использование</h3>
+                        <p>Решение проблемы «последней мили» — быстрый и экологичный способ добраться от метро до работы
+                            или дома.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Проблемы и ограничения</h2>
+            <div class="problems-list">
+                <div class="problem-item">
+                    <h3>Безопасность</h3>
+                    <p>Игнорирование скоростных лимитов и ПДД приводит к увеличению числа аварийных ситуаций с участием
+                        пешеходов.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>Инфраструктура парковок</h3>
+                    <p>Хаотично оставленный транспорт на тротуарах перекрывает движение и создаёт барьеры для
+                        маломобильных граждан.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>Сезонный фактор</h3>
+                    <p>Эффективность и безопасность использования СИМ напрямую зависят от климатических условий в зимний
+                        период.</p>
+                </div>
+                <div class="problem-item">
+                    <h3>Правовой статус</h3>
+                    <p>Нормативная база находится в процессе адаптации, из-за чего правила регулирования сильно разнятся
+                        в зависимости от регионов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Рекомендации</h2>
+            <div class="rec-grid">
+                <div class="rec-card">
+                    <div class="rec-number">// 01</div>
+                    <div class="rec-meta">
+                        <h3>Используйте шлем</h3>
+                        <p>Защитная экипировка значительно снижает риск тяжелых травм при случайном падении.</p>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">// 02</div>
+                    <div class="rec-meta">
+                        <h3>Уважайте пешеходов</h3>
+                        <p>Пешеходная зона приоритетна. Снижайте скорость до минимума в плотном потоке людей.</p>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">// 03</div>
+                    <div class="rec-meta">
+                        <h3>Технический контроль</h3>
+                        <p>Регулярно проверяйте исправность тормозной системы и давление в шинах перед поездкой.</p>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">// 04</div>
+                    <div class="rec-meta">
+                        <h3>Только соло-поездки</h3>
+                        <p>Конструкция самоката рассчитана на вес строго одного человека. Поездки вдвоем опасны.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Правила использования</h2>
+            <div class="rules-wrapper">
+                <img src="mozhno.jpg" alt="Правила использования электросамокатов" class="rules-image">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>ГАУ КО ПО «Колледж сервиса и туризма»</p>
+            <p>© 2026 Учебный исследовательский проект</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
